@@ -12,10 +12,7 @@ fun evaluateGuess(secret: String, guess: String): Evaluation {
         if(element.equals(secretList.get(index))){
             rightPosition++
         }else{
-            val mutableSecret = mutableListOf<Char>()
-            mutableSecret.addAll(secretList)
-            mutableSecret.removeAt(index)
-            if(mutableSecret.contains(element)){
+            if(containsInSubSecret(element, index, secretList)){
                 wrongPosition++
             }
         }
@@ -23,4 +20,10 @@ fun evaluateGuess(secret: String, guess: String): Evaluation {
     val eval = Evaluation(rightPosition, wrongPosition)
     println(eval)
     return eval
+}
+ fun containsInSubSecret(element : Char, index : Int, secretList: List<Char>): Boolean {
+     val mutableSecret = mutableListOf<Char>()
+     mutableSecret.addAll(secretList)
+     mutableSecret.removeAt(index)
+    return mutableSecret.contains(element)
 }
